@@ -22,7 +22,7 @@ public class Balance {
 
     @Override
     public String toString() {
-        return this.bankName + " " + this.borrowerName + " " + this.getAmountPaid() + " " + this.numberOfEmisLeft;
+        return this.bankName + " " + this.borrowerName + " " + this.getAmountPaid() + " " + this.getNumberOfEmisLeft();
     }
 
     public BigDecimal getAmountPaid() {
