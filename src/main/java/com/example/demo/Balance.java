@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Data
 @NoArgsConstructor
@@ -16,14 +17,21 @@ public class Balance {
     private String bankName;
     private String borrowerName;
     private String emiNumber;
+    private BigDecimal amountPaid;
+    private BigDecimal numberOfEmisLeft;
 
     @Override
     public String toString() {
-        return this.bankName+" "+this.borrowerName+" "+this.amountPaid+" "+this.numberOfEmisLeft;
+        return this.bankName + " " + this.borrowerName + " " + this.getAmountPaid() + " " + this.numberOfEmisLeft;
     }
 
-    private BigDecimal amountPaid;
-    private BigDecimal numberOfEmisLeft;
+    public BigDecimal getAmountPaid() {
+        return this.amountPaid.setScale(0, RoundingMode.CEILING);
+    }
+
+    public BigDecimal getNumberOfEmisLeft() {
+        return this.numberOfEmisLeft.setScale(0, RoundingMode.CEILING);
+    }
 
 
 }

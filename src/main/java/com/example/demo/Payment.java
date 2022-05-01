@@ -18,7 +18,7 @@ public class Payment {
     private static List<Payment> paymentList = new ArrayList<>();
     private String bankName;
     private String borrowerName;
-    private String lumpSumAmount;
+    private BigDecimal lumpSumAmount;
     private String emiNumber;
 
     public static List<Payment> getPaymentList(Payment payment) {
@@ -28,16 +28,15 @@ public class Payment {
         return paymentList;
     }
 
-    public BigDecimal getTotalLumpSumPaymentDoneTillAnEmiNumber(String bankName,String borrowerName,String emiNumber){
+    public BigDecimal getTotalLumpSumPaymentDoneTillAnEmiNumber(String bankName, String borrowerName, String emiNumber) {
         BigDecimal totalLumpSum = BigDecimal.ZERO;
-        if(paymentList.size()>0) {
+        if (paymentList.size() > 0) {
             for (Payment payment : paymentList) {
-                if (payment.bankName.equalsIgnoreCase(bankName)
-                        && payment.borrowerName.equalsIgnoreCase(borrowerName) && Integer.parseInt(payment.emiNumber) <= Integer.parseInt(emiNumber)) {
-                    totalLumpSum = totalLumpSum.add(BigDecimal.valueOf(Double.valueOf(payment.lumpSumAmount)));
+                if (payment.getBankName().equalsIgnoreCase(bankName) && payment.getBorrowerName().equalsIgnoreCase(borrowerName) && Integer.parseInt(payment.getEmiNumber()) <= Integer.parseInt(emiNumber)) {
+                    totalLumpSum = totalLumpSum.add(payment.lumpSumAmount);
                 }
             }
         }
-        return  totalLumpSum;
+        return totalLumpSum;
     }
 }
