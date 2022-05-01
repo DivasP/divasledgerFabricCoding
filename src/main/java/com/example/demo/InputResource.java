@@ -1,18 +1,16 @@
 package com.example.demo;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
 public class InputResource {
 
-    public void readFromInputStream(InputStream inputStream) throws IOException {
+    public void readFile(String filePath) throws IOException {
         StringBuilder resultStringBuilder = new StringBuilder();
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+        BufferedReader br = new BufferedReader(new FileReader(filePath));
+        try  {
             String line;
             while ((line = br.readLine()) != null) {
                 List<String> inputList = Arrays.asList(line.split(" "));
@@ -26,6 +24,9 @@ public class InputResource {
                     new Loan().calculateBalance(Balance.builder().bankName(inputList.get(1)).borrowerName(inputList.get(2)).emiNumber(inputList.get(3)).build());
                 }
             }
+        }
+        finally {
+          br.close();
         }
     }
 

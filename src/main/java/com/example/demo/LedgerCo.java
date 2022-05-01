@@ -1,17 +1,14 @@
 package com.example.demo;
 
 import java.io.IOException;
-import java.io.InputStream;
-
 
 public class LedgerCo {
     public static void main(String[] args) {
+            String filePath = args[0];
         try {
-            Class clazz = InputResource.class;
-            InputStream inputStream = clazz.getResourceAsStream("/" + args[0]);
-            new InputResource().readFromInputStream(inputStream);
+            new InputResource().readFile(filePath);
         } catch (IOException e) {
-            System.out.println("Error while reading the file" + e);
+            System.out.println("File not found");
         }
     }
 }
